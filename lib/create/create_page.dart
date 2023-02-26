@@ -1,7 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
-class CreatePage extends StatelessWidget {
+import 'create_model.dart';
+
+class CreatePage extends StatefulWidget {
   const CreatePage({Key? key}) : super(key: key);
+
+  @override
+  State<CreatePage> createState() => _CreatePageState();
+}
+
+class _CreatePageState extends State<CreatePage> {
+  final model = CreateModel();
+
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +47,20 @@ class CreatePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    _image = await model.getImage();
+
+                    // 화면 갱신
+                    setState(() {});
+                  },
                   child: const Text('이미지 선택'),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
-                  child: Image.network(
-                    'https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg',
+                const SizedBox(height: 20),
+                if (_image != null)
+                  Image.file(
+                    _image!,
                     width: 300,
                   ),
-                ),
               ],
             ),
           ),
