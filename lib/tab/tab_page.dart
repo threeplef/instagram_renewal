@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
 
 import 'account/account_page.dart';
 import 'home/home_page.dart';
@@ -18,6 +19,12 @@ class _TabPageState extends State<TabPage> {
     HomePage(),
     SearchPage(),
     AccountPage(),
+    ProfileScreen(
+      providerConfigs: [
+        EmailProviderConfiguration(),
+      ],
+      avatarSize: 24,
+    ),
   ];
 
   @override
@@ -26,6 +33,7 @@ class _TabPageState extends State<TabPage> {
       child: Scaffold(
         body: _pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
@@ -44,6 +52,10 @@ class _TabPageState extends State<TabPage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Account',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Profile',
             ),
           ],
         ),
