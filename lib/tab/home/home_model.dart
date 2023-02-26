@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AccountModel {
-  void logout() async {
-    await FirebaseAuth.instance.signOut();
+class HomeModel {
+  String getEmail() {
+    return FirebaseAuth.instance.currentUser?.email ?? '이메일 없음';
   }
 
   String getNickName() {
-    return FirebaseAuth.instance.currentUser?.displayName ?? '이름 없음';
+    return FirebaseAuth.instance.currentUser?.displayName ?? '닉네임 없음';
   }
 
   String getProfileImageUrl() {
